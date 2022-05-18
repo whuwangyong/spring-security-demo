@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>CONSOLE</title>
+    <link href="/static/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script type="application/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/bootstrap-select.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/nav.js}"></script>
+    <script type="application/javascript" th:src="@{/js/salary-manage.js}"></script>
+
+</head>
+<body>
+<div style="height: 52px; width: 100%;background-color: #f8f8f8">
+    <div id="mynav"></div>
+</div>
+<div class="container-fluid" style="padding-top: 15px;">
+
+    <p>这个页面仅有 ROLE_ADMIN 能够访问 </p>
+    <p>张小龙有权限调薪 </p>
+
+
+
+    <table class="table table-bordered">
+        <thead>
+        <tr class="active">
+            <th>#</th>
+            <th>姓名</th>
+            <th>薪酬</th>
+            <th style="text-align: center;">operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item,itemStat:${allUsers}">
+            <td th:text="${itemStat.index+1}"></td>
+            <td th:id="name_+${item.id}" th:text="${item.name}"></td>
+            <td th:id="salary_+${item.id}" th:text="${item.salary}"></td>
+            <td style="text-align: center;">
+                <div class="btn-group text-center" role="group"
+                     th:data-id="${item.id}">
+                    <button type="button" class="btn btn-warning btnEdit">调薪</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="updateModalLabel">调薪</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="updateForm" method="post" action="/salary-manage/update" enctype="multipart/form-data">
+                    <div>
+                        <input type="hidden" class="form-control" name="id" id="edit_id" />
+                        <div class="input-group">
+                            <span class="input-group-addon">姓名</span>
+                            <input type="text" readonly="readonly" class="form-control" name="name" id="edit_name"/>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">薪酬</span>
+                            <input type="text" class="form-control" name="salary" id="edit_salary"/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="submitUpdate">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

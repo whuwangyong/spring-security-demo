@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>CONSOLE</title>
+    <link href="/static/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script type="application/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/bootstrap-select.min.js}"></script>
+    <script type="application/javascript" th:src="@{/js/nav.js}"></script>
+
+</head>
+<body>
+<div style="height: 52px; width: 100%;background-color: #f8f8f8">
+    <div id="mynav"></div>
+</div>
+<div class="container-fluid" style="padding-top: 15px;">
+
+    <p>这个页面仅有 ROLE_ROOT 能够访问 </p>
+    <p>马化腾有权限对张小龙的调薪操作进行日志审计 </p>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr class="active">
+            <th>#</th>
+            <th>时间</th>
+            <th>操作</th>
+            <th>操作人</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item,itemStat:${allOps}">
+            <td th:text="${itemStat.index+1}"></td>
+            <td th:text="${item.dateTime}"></td>
+            <td th:text="${item.operation}"></td>
+            <td th:text="${item.operator}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
