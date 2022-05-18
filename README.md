@@ -1,4 +1,4 @@
-# 说明
+## 说明
 
 本项目主要利用Spring Security实现登录和权限管理。
 
@@ -10,7 +10,7 @@
 
 
 
-## 编译 &  运行
+### 编译 &  运行
 程序完整运行需要数据库和Kafka。
 
 默认不启动Kafka组件，将自带的数据(位于`src\main\resources\sql\`)导入数据库即可运行。
@@ -46,9 +46,9 @@ Kafka起的作用是，管理员在修改员工的工资时，会发一条消息
 
 
 
-# 遇到的坑
+## 遇到的坑
 
-## 1. ajax post提交遇到403  
+### 1. ajax post提交遇到403  
 本次使用的Thymeleaf 模板，在表单中使用 `<form th:action`，将在页面自动生成`<input name="_csrf"`   
 
 解决（二选一）：  
@@ -62,7 +62,7 @@ Kafka起的作用是，管理员在修改员工的工资时，会发一条消息
 
 第一种没尝试成功，暂时采用第二种。
 
-## 2. 静态资源无法加载
+### 2. 静态资源无法加载
 
 spring secutiry 默认保护了静态资源，因此，在登录之前，css、nav.html 等文件无法访问，造成页面混乱。  
 
@@ -108,6 +108,9 @@ web.ignoring().antMatchers("/static/**");
 ```
 
 
+## 截图
+![home page](assets/img.png)
+![login page](assets/img_1.png)
 
 
 
